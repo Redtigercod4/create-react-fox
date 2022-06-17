@@ -8,19 +8,8 @@
     "start": "webpack-dev-server --mode=development --open --hot",
     "build": "webpack --mode=production"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Redtigercod4/create-react-fox.git"
-  },
-  "keywords": [
-    "react"
-  ],
-  "author": "Wesley Whittle",
+  "keywords": [],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Redtigercod4/create-react-fox/issues"
-  },
-  "homepage": "https://github.com/Redtigercod4/create-react-fox#readme",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
