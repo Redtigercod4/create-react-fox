@@ -1,6 +1,6 @@
 {
   "name": "create-react-fox",
-  "version": "0.0.5",
+  "version": "0.0.15",
   "description": "This is a template React Boilerplate that can be cloned via the npx tools.",
   "main": "index.js",
   "bin": "./bin/template.js",
@@ -11,7 +11,6 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

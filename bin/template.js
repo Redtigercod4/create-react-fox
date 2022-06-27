@@ -20,39 +20,34 @@ console.log(
   `Cloning the latest version of the repository in the folder ${projectPath}`
 );
 const npmInit = runCmd(`git clone ${gitRepo} ${projectPath}`);
-
-console.log(`Installing Dependencies...`);
-const depsInit = runCmd(`cd ${projectPath} && npm install`);
+fs.rmSync(`${projectPath}/package-lock.json`)
+const depsInit = runCmd(`cd ${projectPath}`);
 
 function fileAmend() {
-  let oldHeader = {
-    "name": "create-react-fox",
-    "version": "0.0.5",
-    "description":
-      "This is a template React Boilerplate that can be cloned via the npx tools.",
-  };
-  let newHeader = {
-    "name": `"${projectPath}"`,
-    "version": "0.0.1",
-    "description": "",
-  };
-  const packageJson = fs
-    .readFileSync(`${projectPath}/package.json`, "utf-8")
-    .replace(oldHeader, newHeader);
+  const packageJson = fs.readFileSync(`${projectPath}/package.json`, "utf-8");
+
+  const updatePackageJson = packageJson
+    .replace(`"name": "create-react-fox"`, `"name": "${projectPath}"`)
+    .replace(`"version": "0.0.15"`, `"version": "0.0.1"`)
+    .replace(
+      `"description": "This is a template React Boilerplate that can be cloned via the npx tools."`,
+      `"description": ""`
+    ).replace(`"bin": "./bin/template.js"`, `"bin": ""`);
 
   const updateFile = fs.writeFileSync(
     `${projectPath}/package.json`,
-    packageJson
+    updatePackageJson
   );
+  fs.rmSync(`${projectPath}/bin/template.js`)
+  fs.rmdirSync(`${projectPath}/bin`)
   return updateFile;
 }
 
-console.log(`Tidying up the mess...`)
-const updatedFile = fileAmend();
-console.log(updatedFile)
+console.log(`Tidying up the mess...`);
+const fileInit = fileAmend();
+runCmd(`git remote remove origin && npm install`)
 
-
-if (!npmInit || !depsInit) return process.exitCode(1);
+if (!npmInit || !depsInit || !fileInit) return console.error(`Whoops`);
 
 console.log(
   `Congratulations. it has worked. You can now cd ${projectPath} and run npm start`
