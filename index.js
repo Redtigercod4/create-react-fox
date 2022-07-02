@@ -45,7 +45,7 @@ function fileAmend() {
 
 console.log(`Tidying up the mess...`);
 const fileInit = fileAmend();
-runCmd(`git remote remove origin && npm install`)
+runCmd(`git rm -rf .git && npm install`)
 
 if (!npmInit || !depsInit || !fileInit) return console.error(`Whoops`);
 
